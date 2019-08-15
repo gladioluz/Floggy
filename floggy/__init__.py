@@ -1,26 +1,23 @@
-import logging
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_jwt_extended import JWTManager
+from flask_recaptcha import ReCaptcha
 from logging.handlers import RotatingFileHandler
+import logging
 
 from config import Config, LOG_FILE
-from floggy.utils.converters import UUIDConverter
+from floggy.core.converters import UUIDConverter
 
 db = SQLAlchemy()
-login = LoginManager()
 jwt = JWTManager()
+login = LoginManager()
+recaptcha = ReCaptcha()
 
 
 def create_app(config_class=Config):
     app = Flask(__name__)
     app.config.from_object(config_class)
-    app.static_folder = 'static'
-    app.add_url_rule('/static/<path:filename>',
-                     endpoint='static',
-                     subdomain='admin',
-                     view_func=app.send_static_file)
 
     db.init_app(app)
     login.init_app(app)

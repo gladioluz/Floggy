@@ -26,7 +26,7 @@ class Content(db.Model):
     seen = db.Column(db.Integer(), default=0)
     comment_count = db.Column(db.Integer(), default=0)
 
-    created = db.Column(db.DateTime)
-    updated = db.Column(db.DateTime)
+    created = db.Column(db.DateTime())
+    updated = db.Column(db.DateTime())
 
     status = db.Column(db.SmallInteger())
